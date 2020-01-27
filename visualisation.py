@@ -62,7 +62,7 @@ def crossection(lat, z, parameter, var_range, name):
     f.canvas.flush_events()
     pyplot.pause(0.5)
 
-def crossection_streamlines(lat, z, vel_lat, vel_z, name):
+def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     print(lat.shape)
     xs = lat[0][:][:] 
     ys = z[0][:][:]
