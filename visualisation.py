@@ -30,8 +30,6 @@ def sst_plot(grid,sst,name):
     lats,lons=get_lats_lons(grid)
     xs,ys=get_xy()
     sst=sst.flatten()
-    # at this point we have set of x,y and T of same size)
-    # note xs and ys have different size from lats, lons-500, as well as T
     sst_=griddata((lons,lats),sst,(xs,ys), method='linear')
     
     pyplot.clf()
@@ -40,16 +38,16 @@ def sst_plot(grid,sst,name):
     pyplot.savefig(name,format='png')
    
     pyplot.show()
-    f.canvas.flush_events()
     pyplot.pause(0.5)
+    pyplot.clf()
 
 def crossection(lat, z, parameter, var_range, name):
 
-    # structure of arrays is [lon][lat][depth]
+# structure of arrays is [lon][lat][depth]
     xs = lat[0][:][:]
     ys = z[0][:][:]
-    #fast solution for plotting to rotate data(have depth in z
-    #next should invert z as surface now at the bottom(with [::-1] 
+#fast solution for plotting to rotate data(have depth in z
+#next should invert z as surface now at the bottom(with [::-1] 
 
     par_=parameter.transpose()
 
@@ -59,8 +57,8 @@ def crossection(lat, z, parameter, var_range, name):
     pyplot.savefig(name, format='png')
     
     pyplot.show()
-    f.canvas.flush_events()
     pyplot.pause(0.5)
+    pyplot.clf()
 
 def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     print(lat.shape)
@@ -73,6 +71,6 @@ def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     pyplot.savefig(name,format='png')
     
     pyplot.show()
-    f.canvas.flush_events()
     pyplot.pause(0.5)
+    pyplot.clf()
 
