@@ -3,6 +3,7 @@ import numpy
 import matplotlib
 import math
 from matplotlib import pyplot
+from scipy import integrate
 
 numpy.random.seed(123451)
 
@@ -31,7 +32,7 @@ if __name__=="__main__":
   p.parameters.topography_option='internal'
   p.parameters.horiz_grid_option='amuse'
   p.parameters.vert_grid_option='amuse'     
-  p.parameters.vertical_layer_thicknesses=dz * (4000 | units.m)
+  p.parameters.vertical_layer_thicknesses=dz * (5000 | units.m)
   #p.parameters.surface_heat_flux_forcing = 'amuse'
   #p.parameters.surface_freshwater_flux_forcing = 'amuse'
   p.parameters.windstress_forcing = 'analytic'
@@ -42,11 +43,15 @@ if __name__=="__main__":
 
   forcings = p.forcings.copy()
   channel=forcings.new_channel_to(p.forcings)
+
+  f0 = 8.4e-5
+  beta = 1.85e-11
+  tau0 = 0.1
   
   for i in range(0,dim):
     for j in range(0,dim):
-      cor_par = 8.4e-5 + 1.85e-11 * j * 400 
-      tau_x[i][j] = 0.1*cor_par*math.sin(2*3.14*j/dim) 
+      cor_par = (f0 + beta*j*4e5)/f0
+      tau_x[i][j] = tau0*cor_par*math.sin(2*math.pi*j/dim)
 
   forcings.tau_x = tau_x | units.Pa
   forcings.tau_y = tau_y | units.Pa
@@ -62,13 +67,11 @@ if __name__=="__main__":
   
   x=p.elements.lon.flat
   y=p.elements.lat.flat
-  pyplot.plot(x.value_in(units.deg),y.value_in(units.deg),'r+')
-  pyplot.show()
   
   input()
 
   tnow=p.model_time
-  dt = 500*365 | units.day
+  dt = 100*365 | units.day
   tend=tnow+(365 * 10000 | units.day)
 
 
@@ -112,12 +115,25 @@ if __name__=="__main__":
       density_av = density_slice.value_in(units.g / units.cm**3)/dim
       salinity = salinity_slice.value_in(units.g / units.kg)/dim
    
+#Meridional overturning streamfunction
+#based on iemic/matlab/mstream.m
+
+      y = numpy.linspace(0.0, 5e5, 16)
+      z_strf = integrate.cumtrapz(vel_z, y, axis = 0, initial = 0)
+      z_strf = z_strf/1e2
+
 #Creating all plots and writing data to files, [] - range for colorbar  
 #Plot crossections
-      crossection(lat,z,vel_lat,[-6.0,6.0],"velocity_lat_"+str(t)+".png")
-      crossection(lat,z,salinity,[0.34,0.36],"salinity_av_"+str(t)+".png")
-      crossection(lat_el,z_el,temp_av,[2.0,15.0],"temperature_av_"+str(t)+".png")
-      crossection(lat_el,z_el,density_av,[0.0,0.04],"density_av_"+str(t)+".png")
+      crossection(lat,z,vel_lat,[-6.0,6.0],"y_velocity, cm/s","velocity_lat_"+ \
+                  str(t)+".png")
+      crossection(lat,z,salinity,[0.34,0.36],"salinity, g/kg","salinity_av_"+  \
+                  str(t)+".png")
+      crossection(lat_el,z_el,temp_av,[2.0,15.0],"temperature, C", \
+                  "temperature_av_"+str(t)+".png")
+      crossection(lat_el,z_el,density_av,[0.0,0.04],"density, g/cm3", \
+                  "density_av_"+str(t)+".png")
+      crossection(lat,z,z_strf,[-6.0,6.0],"meridional overturning streamfunction, Sv", \
+                  "merid_streamf"+str(t)+".png")
       cross_vectorfield(lat,z,vel_lat,vel_z,"vel_total"+str(t)+".png")
 
 #Plot surface data
