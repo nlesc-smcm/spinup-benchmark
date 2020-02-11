@@ -95,8 +95,15 @@ if __name__=="__main__":
         vel_lat_slice = vel_lat_slice + p.nodes3d.yvel[i][:][:]
         vel_z_slice = vel_z_slice + p.nodes3d.zvel[i][:][:]
 
-      vel_lat = vel_lat_slice.value_in(units.cm / units.s)
-      vel_z = vel_z_slice.value_in(units.cm / units.s) 
+      vel_lat = vel_lat_slice.value_in(units.cm / units.s)/dim
+      vel_z = vel_z_slice.value_in(units.cm / units.s)/dim
+
+#Meridional overturning streamfunction
+#based on iemic/matlab/mstream.m
+#corrected v_z to v_lat
+      y = numpy.linspace(0.0, 5e5, 16)
+      z_strf = integrate.cumtrapz(vel_lat, y, initial = 0)
+      z_strf = z_strf/1e4
 
 #coordinates and variables calcuated in elements
       lat_el = p.elements3d.lat.value_in(units.deg)
@@ -115,12 +122,7 @@ if __name__=="__main__":
       density_av = density_slice.value_in(units.g / units.cm**3)/dim
       salinity = salinity_slice.value_in(units.g / units.kg)/dim
    
-#Meridional overturning streamfunction
-#based on iemic/matlab/mstream.m
 
-      y = numpy.linspace(0.0, 5e5, 16)
-      z_strf = integrate.cumtrapz(vel_z, y, axis = 0, initial = 0)
-      z_strf = z_strf/1e2
 
 #Creating all plots and writing data to files, [] - range for colorbar  
 #Plot crossections
