@@ -78,6 +78,11 @@ if __name__=="__main__":
   
   input()
 
+  vel_lat_old = p.nodes3d.yvel[0][:][:]
+  vel_z_old = p.nodes3d.zvel[0][:][:]
+  vel_lat_old = vel_lat_old.value_in(units.cm / units.s)
+  vel_z_old = vel_z_old.value_in(units.cm / units.s)
+
   tnow=p.model_time
   dt = 100*365 | units.day
   tend=tnow+(365 * 10000 | units.day)
@@ -158,4 +163,12 @@ if __name__=="__main__":
       #sst_plot(p.nodes,tau_y,"tau_y_"+str(t)+".png") 
       sst_plot(p.nodes,bar_x,"barotropic_x_vel"+str(t)+".png")
       sst_plot(p.nodes,bar_y,"barotropic_y_vel"+str(t)+".png")
+
+#Check convergence of solution by mean difference in velocity fields
+      vel_lat_diff=vel_lat - vel_lat_old
+      vel_z_diff = vel_z - vel_z_old
+      vel_lat_old = vel_lat
+      vel_z_old = vel_z
+      print("mean difference, NS-component:",numpy.mean(abs(vel_lat_diff)), \
+            "Z-component:",numpy.mean(abs(vel_z_diff)))
 
