@@ -10,9 +10,17 @@ numpy.random.seed(123451)
 from omuse.community.pop.interface import POP
 from amuse.units import units
 from amuse.io import write_set_to_file
-from iemic_grid import depth_array,depth_levels
 
 from visualisation import sst_plot, crossection, cross_vectorfield
+
+
+def depth_levels(N, stretch_factor=0):
+  z=numpy.arange(N)/(1.*(N-1))
+  if stretch_factor==0:
+    return z
+  else:
+    return 1 - numpy.tanh(stretch_factor*(1-z))/numpy.tanh(stretch_factor)
+
 
 if __name__=="__main__":
 #prepare the plot stuff
