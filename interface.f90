@@ -1819,17 +1819,13 @@ function set_shf_data_type(type_) result (ret)
   integer :: ret
   character (char_len), intent(in) :: type_
   ret=0
-  if (type_ == 'file')then
-    shf_data_type = type_
-  elseif(type_ == 'amuse') then
+  if(type_ == 'amuse') then
     shf_data_type = type_
     shf_formulation = 'restoring' 
     shf_interp_freq = 'every-timestep'
     shf_interp_type = 'linear'
-  elseif(type_ == 'amuse') then
-    shf_data_type = type_
   else
-    ret=-1
+    shf_data_type = type_
   endif
 end function
 
@@ -1859,9 +1855,7 @@ function set_sfwf_data_type(type_) result (ret)
   integer :: ret
   character (char_len), intent(in) :: type_
   ret=0
-  if (type_ == 'file')then
-    shf_data_type = type_
-  elseif(type_ == 'amuse') then
+  if(type_ == 'amuse') then
     sfwf_data_type = type_
     sfwf_formulation = 'restoring' 
     sfwf_interp_freq = 'every-timestep'
@@ -1872,7 +1866,7 @@ function set_sfwf_data_type(type_) result (ret)
     sfwf_interp_freq = 'every-timestep'
     sfwf_interp_type = 'linear'
   else
-    ret=-1
+    sfwf_data_type = type_
   endif
 end function
 function get_sfwf_filename(filename) result (ret)

@@ -931,16 +931,14 @@ class POP(CommonCode):
             "get_shf_data_type",
             "set_shf_data_type",
             "surface_heat_flux_forcing",
-            "Option for surface heat flux should be either \'analytic\', \'amuse\' or \'file\'",
-            ##"Setting for surface heat flux",
+            "Option for surface heat flux should one of ['none', 'analytic', 'amuse', 'monthly', 'annual', 'n-hour']",
             default_value = 'none'
         )
         object.add_method_parameter(
             "get_sfwf_data_type",
             "set_sfwf_data_type",
             "surface_freshwater_flux_forcing",
-            "Options for surface salinity flux should be either \'analytic\', \'amuse\' or \'file\'",
-            #"Setting for surface freshwater flux forcing",
+            "Options for surface salinity flux should be one of ['none', 'analytic', 'amuse', 'monthly', 'annual', 'n-hour']",
             default_value = 'none'
         )
         object.add_method_parameter(
