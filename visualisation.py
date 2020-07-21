@@ -53,7 +53,7 @@ def crossection(lat, z, parameter, var_range, label, name):
 
     pyplot.clf()
     pyplot.pcolormesh(par_[::-1,:],vmin=var_range[0],vmax=var_range[1])
-    pyplot.colorbar()
+    cbar=pyplot.colorbar()
 #plot contours
     ax=pyplot.contour(par_[::-1,:],colors='k')
 #add labels
@@ -80,12 +80,12 @@ def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     pyplot.pause(0.5)
     pyplot.clf()
 
-def plot_data(var,label, name)
+def plot_data(var,label, name):
 
     pyplot.clf()
-    pyplot.imshow(usurf.T, origin="lower")
-    pyplot.colorbar()
-    ax=pyplot.contour(usurf.T, origin="lower")
+    pyplot.imshow(var.T, origin="lower")
+    cbar=pyplot.colorbar()
+    ax=pyplot.contour(var.T, origin="lower")
     pyplot.clabel(ax, inline=1, fontsize = 10)
     cbar.set_label(label,rotation=90)
     pyplot.savefig(name, format='png')
@@ -95,3 +95,12 @@ def plot_data(var,label, name)
     pyplot.clf()
 
 
+def cross_vect_iemic(xs, ys, vel_lat, vel_z, name):
+
+    pyplot.clf()
+    pyplot.quiver(xs,ys,vel_lat,vel_z)
+    pyplot.savefig(name,format='png')
+    
+    pyplot.show()
+    pyplot.pause(0.5)
+    pyplot.clf()
