@@ -41,7 +41,7 @@ def sst_plot(grid,sst,name):
     pyplot.pause(0.5)
     pyplot.clf()
 
-def crossection(lat, z, parameter, var_range, name):
+def crossection(lat, z, parameter, var_range, label, name):
 
 # structure of arrays is [lon][lat][depth]
     xs = lat[0][:][:]
@@ -79,4 +79,19 @@ def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     pyplot.show()
     pyplot.pause(0.5)
     pyplot.clf()
+
+def plot_data(var,label, name)
+
+    pyplot.clf()
+    pyplot.imshow(usurf.T, origin="lower")
+    pyplot.colorbar()
+    ax=pyplot.contour(usurf.T, origin="lower")
+    pyplot.clabel(ax, inline=1, fontsize = 10)
+    cbar.set_label(label,rotation=90)
+    pyplot.savefig(name, format='png')
+
+    pyplot.show()
+    pyplot.pause(0.5)
+    pyplot.clf()
+
 
