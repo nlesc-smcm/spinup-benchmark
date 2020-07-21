@@ -52,7 +52,7 @@ def crossection(lat, z, parameter, var_range, label, name):
     par_=parameter.transpose()
 
     pyplot.clf()
-    pyplot.pcolormesh(par_[::-1,:],vmin=var_range[0],vmax=var_range[1])
+    pyplot.pcolormesh(par_[::-1,:]) #,vmin=var_range[0],vmax=var_range[1])
     cbar=pyplot.colorbar()
 #plot contours
     ax=pyplot.contour(par_[::-1,:],colors='k')
@@ -85,7 +85,7 @@ def plot_data(var,label, name):
     pyplot.clf()
     pyplot.imshow(var.T, origin="lower")
     cbar=pyplot.colorbar()
-    ax=pyplot.contour(var.T, origin="lower")
+    ax=pyplot.contour(var.T, origin="lower",colors='k')
     pyplot.clabel(ax, inline=1, fontsize = 10)
     cbar.set_label(label,rotation=90)
     pyplot.savefig(name, format='png')
