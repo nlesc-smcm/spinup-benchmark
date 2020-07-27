@@ -53,10 +53,7 @@ for i in range(1,16):
 temp = temp_slice/16.
 sal = sal_slice/16.
 
-density_crossection=(1.035 -  0.0001 * (temp - 15.) + 0.00076 * (sal-35))*1000
-
-usurf=instance.grid[:,:,0].temperature
-plot_data(usurf, "temperature top", "temperature_top.png")
+density_crossection=(1.035 -  0.0001 * (temp - 12.5) + 0.00076 * (sal-35))*1000
 
 usurf=instance.grid[5,:,:].temperature
 plot_data(usurf, "temperature SN single slice", "temperature_SN.png")
