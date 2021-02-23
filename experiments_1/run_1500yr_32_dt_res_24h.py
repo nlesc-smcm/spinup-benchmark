@@ -134,7 +134,7 @@ if __name__=="__main__":
   while tnow< tend-dt/2:
       j += 1
       if j%2 == 0:
-         dt = 6 | units.hour
+         dt = 24 | units.hour
       else:
          dt = 365*10 | units.day
       if start == True:
