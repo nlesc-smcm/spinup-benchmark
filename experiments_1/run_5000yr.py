@@ -240,13 +240,12 @@ if __name__=="__main__":
 
       if j % 2 != 0:
          k += 1
-         rel_lat.append(numpy.mean(abs(vel_lat_diff))/dt_residual)
-         rel_z.append(numpy.mean(abs(vel_z_diff))/dt_residual)
-         rel_dens.append(numpy.mean(abs(density_diff))/dt_residual)
-         rel_merid.append(numpy.mean(abs(merid_diff))/dt_residual)
-         rel_bar.append(numpy.mean(abs(bar_diff))/dt_residual)
-         rel_temp.append(numpy.mean(abs(temp_diff))/dt_residual)
-
+         rel_lat.append(numpy.mean(abs(vel_lat_diff))/numpy.mean(abs(vel_lat)))
+         rel_z.append(numpy.mean(abs(vel_z_diff))/numpy.mean(abs(vel_z)))
+         rel_dens.append(numpy.mean(abs(density_diff))/numpy.mean(abs(density)))
+         rel_merid.append(numpy.mean(abs(merid_diff))/numpy.mean(abs(z_strf)))
+         rel_bar.append(numpy.mean(abs(bar_diff))/numpy.mean(abs(z_strtf2)))
+         rel_temp.append(numpy.mean(abs(temp_diff))/numpy.mean(abs(temperature)))
   for l in range(0,k-1):
       out_file1.write(str(rel_temp[l]) + '\n')
       out_file2.write(str(rel_z[l]) + '\n')
