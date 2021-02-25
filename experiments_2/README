@@ -1,8 +1,6 @@
-In this set of experiments we will do restart from pop final state and iemic final state
-1) runs 16*16*16:
-   restart from pop (restart_16) with residual dt calculated on the scale of 12 hours
-   restart from iemic (restart_iemic_16) with residual dt calculated on the scale of 12 hours
-1) runs 32*32*16:
-   restart from pop (restart_16) with residual dt calculated on the scale of 6 hours
-   restart from iemic (restart_iemic_16) with residual dt calculated on the scale of 6 hours
-Difference in dt for 16 and 32 runs is based on model dt time - for 16*16*16 run 12 hours is optimal, 6 is unnesessary small
+In this group of experiments we check convergency, particularly the approximation of residual based on Bernsen, 2010.
+runs on 32_32_16 grid(run_1500yr_32_dt_*h):
+   dt = 12 (24 hours)
+runs on 64_64_16 grid(run_1500yr_64_dt_*h):
+   dt =  12, possibly 24 hours
+to run a model  src_*_*_*(*_*_* denotes dimensions of the model) should be copied to src_test and same for pop_in_lowres_* (* denotes dt) should be copied to pop_in_lowres, otherwise interface.py should be corrected  

@@ -1,1 +1,8 @@
-Here we will make a global run with 96*38*12 resolution, if restart will not be possible for this dz size data from iemic 96*38*12 will be upscaled to 96*38*16 resolution.
+In this set of experiments we will do restart from pop final state and iemic final state
+1) runs 16*16*16:
+   restart from pop (restart_16) with residual dt calculated on the scale of 12 hours
+   restart from iemic (restart_iemic_16) with residual dt calculated on the scale of 12 hours
+1) runs 32*32*16:
+   restart from pop (restart_16) with residual dt calculated on the scale of 6 hours
+   restart from iemic (restart_iemic_16) with residual dt calculated on the scale of 6 hours
+Difference in dt for 16 and 32 runs is based on model dt time - for 16*16*16 run 12 hours is optimal, 6 is unnesessary small

@@ -5,10 +5,4 @@ runs on 16*16*16 grid:
 2) runs for 0-1500 years (run_1500yr_16_dt_res_*h):
    dt = 6, 12, 24 hours
    dt_residual (fig. 3.2 from Bernsen) = 6, 12, 24, 48 hours
-runs on 32_32_16 grid(run_1500yr_32_dt_res_*h):
-   dt = 6, 12, 24 hours
-   dt_residual (fig. 3.2 from Bernsen) = 6, 12, 24, 48 hours
-runs on 64_64_16 grid(run_1500yr_64_dt_res_*h):
-   dt = 6, 12, 24 hours
-   dt_residual (fig. 3.2 from Bernsen) = 6, 12, 24, 48 hours
-to run a model of different resolution src_*_*_*(*_*_* denotes dimensions of the model) should be copied to src_test and same for pop_in_lowres_* (* denotes dt) should be copied to pop_in_lowres, otherwise interface.py should be corrected  
+to run a model src_16_16_16 should be copied to src_test and  pop_in_lowres_* (* denotes dt) should be copied to pop_in_lowres, otherwise interface.py should be corrected  
