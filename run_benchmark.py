@@ -113,12 +113,15 @@ if __name__=="__main__":
 
 #Meridional overturning streamfunction
 #based on iemic/matlab/mstream.m
-#corrected v_z to v_lat
-      y = numpy.linspace(0.0, 5e5, 16)
-      z_strf = integrate.cumtrapz(vel_lat, y, initial = 0)
-      z_strf = z_strf/1e4
+      y = numpy.linspace(0.0, 5e3, 16)
+      cumsum=-vel_lat[:,15]*250
+      z_strf=vel_lat.copy()
+      z_strf[:,15]=cumsum
+      for i in range(len(vel_lat[0,:])-1,0,-1):
+        cumsum += -vel_lat[:,i]*250
+        z_strf[:,i] = cumsum
 
-#coordinates and variables calcuated in elements
+#coordinates and variables calcuated on elements
       lat_el = p.elements3d.lat.value_in(units.deg)
       z_el = p.elements3d.z.value_in(units.m)
       
@@ -154,13 +157,11 @@ if __name__=="__main__":
 #Plot surface data
       bar_x = p.nodes.vx_barotropic.value_in(units.cm / units.s ) 
       bar_y = p.nodes.vy_barotropic.value_in(units.cm / units.s ) 
-      #sst_plot(p.nodes,tau_y,"psi"+str(t)+".png") 
 
       tau_x = p.forcings.tau_x.value_in(units.Pa)
       tau_y = p.forcings.tau_y.value_in(units.Pa)
 
-      #sst_plot(p.nodes,tau_x,"tau_x_"+str(t)+".png") 
-      #sst_plot(p.nodes,tau_y,"tau_y_"+str(t)+".png") 
+
       sst_plot(p.nodes,bar_x,"barotropic_x_vel"+str(t)+".png")
       sst_plot(p.nodes,bar_y,"barotropic_y_vel"+str(t)+".png")
 
@@ -169,6 +170,6 @@ if __name__=="__main__":
       vel_z_diff = vel_z - vel_z_old
       vel_lat_old = vel_lat
       vel_z_old = vel_z
-      print("mean difference, NS-component:",numpy.mean(abs(vel_lat_diff)), \
-            "Z-component:",numpy.mean(abs(vel_z_diff)))
+      print("mean difference, NS-component:",numpy.mean(abs(vel_lat_diff))/numpy.mean(abs(vel_lat)), \
+            "Z-component:",numpy.mean(abs(vel_z_diff))/numpy.mean(abs(vel_z)))
 

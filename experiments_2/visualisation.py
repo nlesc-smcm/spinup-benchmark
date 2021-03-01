@@ -80,26 +80,26 @@ def cross_vectorfield(lat, z, vel_lat, vel_z, name):
     pyplot.pause(0.5)
     pyplot.clf()
 
-def plot_data(var,label, name):
+def plot_hor(lat, lon, parameter, var_range, label, name):
+
+# structure of arrays is [lon][lat][depth]
+    xs = lon[:,:,0]
+    ys = lat[:,:,0]
+#fast solution for plotting to rotate data(have depth in z
+#next should invert z as surface now at the bottom(with [::-1] 
+
+    par_=parameter.transpose()
 
     pyplot.clf()
-    pyplot.imshow(var.T, origin="lower")
+    pyplot.pcolormesh(par_[::-1,:]) #,vmin=var_range[0],vmax=var_range[1])
     cbar=pyplot.colorbar()
-    ax=pyplot.contour(var.T, origin="lower",colors='k')
-    pyplot.clabel(ax, inline=1, fontsize = 10)
+#plot contours
+    ax=pyplot.contour(par_[::-1,:],colors='k')
+#add labels
+    pyplot.clabel(ax,inline=1, fontsize = 10)
     cbar.set_label(label,rotation=90)
+
     pyplot.savefig(name, format='png')
-
-    pyplot.show()
-    pyplot.pause(0.5)
-    pyplot.clf()
-
-
-def cross_vect_iemic(xs, ys, vel_lat, vel_z, name):
-
-    pyplot.clf()
-    pyplot.quiver(xs,ys,vel_lat,vel_z)
-    pyplot.savefig(name,format='png')
     
     pyplot.show()
     pyplot.pause(0.5)

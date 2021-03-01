@@ -1,0 +1,8 @@
+In this group of experiments we check convergency, particularly the approximation of residual based on Bernsen, 2010.
+Following experiments are included:
+runs on 16*16*16 grid:
+1) 0-5000 years
+2) runs for 0-1500 years (run_1500yr_16_dt_res_*h):
+   dt = 6, 12, 24 hours
+   dt_residual (fig. 3.2 from Bernsen) = 6, 12, 24, 48 hours
+to run a model src_16_16_16 should be copied to src_test and  pop_in_lowres_* (* denotes dt) should be copied to pop_in_lowres, otherwise interface.py should be corrected  
