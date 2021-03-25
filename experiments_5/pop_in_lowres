@@ -1,6 +1,6 @@
 &domain_nml
-  nprocs_clinic = 8 !8
-  nprocs_tropic = 8 !8
+  nprocs_clinic = 8 
+  nprocs_tropic = 8 
   clinic_distribution_type = 'cartesian'
   tropic_distribution_type = 'cartesian'
   distribution_file= ' '
@@ -71,7 +71,7 @@
 
 &diagnostics_nml
    diag_global_freq_opt   = 'nday'
-   diag_global_freq       = 1
+   diag_global_freq       = 10
    diag_cfl_freq_opt      = 'never'
    diag_cfl_freq          = 50
    diag_transp_freq_opt   = 'never'
@@ -153,8 +153,8 @@
    implicit_vertical_mix = .true.
    convection_type = 'diffusion'
    nconvad = 2
-   convect_diff = 1000.0
-   convect_visc = 1000.0
+   convect_diff = 1000.0 !1000
+   convect_visc = 1000.0 !1000
    bottom_heat_flx = 0.0
    bottom_heat_flx_depth = 100000.00 
 /
@@ -189,20 +189,20 @@
 /
 
 &hmix_nml
-   hmix_momentum_choice = 'anis'
-   hmix_tracer_choice   = 'gent'
+   hmix_momentum_choice = 'del2'!anis'
+   hmix_tracer_choice   = 'del2'!'gent'
 /
 
 &hmix_del2u_nml
-   lauto_hmix           = .true. 
+   lauto_hmix           = .false. 
    lvariable_hmix       = .false. 
-   am                   = 1.e8
+   am                   = 1.6e6
 /
 
 &hmix_del2t_nml
-   lauto_hmix           = .true. 
+   lauto_hmix           = .false. 
    lvariable_hmix       = .false. 
-   ah                   = 1.e8
+   ah                   = 1.6e6
 /
 
 &hmix_del4u_nml
@@ -331,13 +331,13 @@
 /
 
 &forcing_pt_interior_nml
-   pt_interior_formulation = 'none'!'restoring'
+   pt_interior_formulation = 'none'
    pt_interior_data_type   = 'none'
    pt_interior_data_inc    = 1.e20
    pt_interior_interp_freq = 'never'
    pt_interior_interp_type = 'nearest'
    pt_interior_interp_inc  = 1.e20
-   pt_interior_restore_tau = 20.0
+   pt_interior_restore_tau = 1.e20
    pt_interior_filename    = 'unknown-pt_interior'
    pt_interior_file_fmt    = 'bin'
    pt_interior_data_renorm = 1.
@@ -348,13 +348,13 @@
 /
 
 &forcing_s_interior_nml
-   s_interior_formulation = 'none'!'restoring'
+   s_interior_formulation = 'none'
    s_interior_data_type   = 'none'
    s_interior_data_inc    = 1.e20
    s_interior_interp_freq = 'never'
    s_interior_interp_type = 'nearest'
    s_interior_interp_inc  = 1.e20
-   s_interior_restore_tau = 20.0
+   s_interior_restore_tau = 1.e20
    s_interior_filename    = 'unknown-s_interior'
    s_interior_file_fmt    = 'bin'
    s_interior_data_renorm = 1.
