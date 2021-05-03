@@ -43,28 +43,6 @@ def sst_plot(grid,sst,name,lowleft=[-80.,-180.] | units.deg,
     pyplot.show()
 
 
-def crossection(lat, z, parameter, var_range, label, name):
-
-    xs = lat[0][:][:]
-    ys = z[0][:][:]
-
-    par_=parameter.transpose()
-
-    pyplot.clf()
-    pyplot.pcolormesh(par_[::-1,:]) #,vmin=var_range[0],vmax=var_range[1])
-    cbar=pyplot.colorbar()
-    #plot contours
-    ax=pyplot.contour(par_[::-1,:],colors='k')
-    #add labels
-    pyplot.clabel(ax,inline=1, fontsize = 10)
-    cbar.set_label(label,rotation=90)
-
-    pyplot.savefig(name, format='png')
-    
-    pyplot.show()
-    pyplot.pause(0.5)
-    pyplot.clf()
-
 def cross_vectorfield(lat, z, vel_lon, vel_lat, name):
     print(lat.shape)
     xs = lat[:,:,0] 
@@ -96,9 +74,9 @@ def plot_hor(lat, lon, parameter, var_range, label, name, time):
     #plot coastlines and fields
     ax = pyplot.axes(projection=ccrs.PlateCarree())
     ax.coastlines()
-    pyplot.pcolormesh(xs,ys,par_)    
-    ax.add_feature(cartopy.feature.LAND, zorder=100, edgecolor='k')
+    pyplot.pcolormesh(xs,ys,par_,vmin=var_range[0],vmax=var_range[1])    
     cbar=pyplot.colorbar()
+    ax=pyplot.contour(xs,ys,par_,colors='k',linewidth=0.3)#
     #add labels
     cbar.set_label(label,rotation=90)
     pyplot.text(-20.0, -110.0,'time = ' + str(time) + 'years')
