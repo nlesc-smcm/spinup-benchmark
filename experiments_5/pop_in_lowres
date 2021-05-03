@@ -1,12 +1,11 @@
 &domain_nml
-  nprocs_clinic = 8 
-  nprocs_tropic = 8 
+  nprocs_clinic = 8
+  nprocs_tropic = 8
   clinic_distribution_type = 'cartesian'
   tropic_distribution_type = 'cartesian'
   distribution_file= ' '
   ew_boundary_type = 'cyclic'
   ns_boundary_type = 'closed'
-  distribution_file = ''
 /
 
 &context_nml
@@ -71,11 +70,11 @@
 
 &diagnostics_nml
    diag_global_freq_opt   = 'nday'
-   diag_global_freq       = 10
-   diag_cfl_freq_opt      = 'never'
-   diag_cfl_freq          = 50
+   diag_global_freq       = 1
+   diag_cfl_freq_opt      = 'nday'
+   diag_cfl_freq          = 1
    diag_transp_freq_opt   = 'never'
-   diag_transp_freq       = 50
+   diag_transp_freq       = 1
    diag_transport_file    = 'transport_contents'
    diag_outfile           = 'diag'
    diag_transport_outfile = 'tran'
@@ -140,7 +139,7 @@
 &solvers
    solverChoice         = 'ChronGear'
    convergenceCriterion = 1.e-12
-   maxIterations        = 1000
+   maxIterations        = 1000000
    convergenceCheckFreq = 25
    preconditionerChoice = 'diagonal'
    preconditionerFile   = 'unknownPrecondFile'
@@ -153,8 +152,8 @@
    implicit_vertical_mix = .true.
    convection_type = 'diffusion'
    nconvad = 2
-   convect_diff = 1000.0 !1000
-   convect_visc = 1000.0 !1000
+   convect_diff = 1000.0
+   convect_visc = 1000.0
    bottom_heat_flx = 0.0
    bottom_heat_flx_depth = 100000.00 
 /
@@ -171,11 +170,11 @@
 /
 
 &vmix_kpp_nml
-   bckgrnd_vdc1    = 5.24 !0.524
-   bckgrnd_vdc2    = 3.13 !0.313
-   bckgrnd_vdc_dpth= 1000.0e02
+   bckgrnd_vdc1    = 0.524
+   bckgrnd_vdc2    = 0.313
+   bckgrnd_vdc_dpth= 1000.0e2
    bckgrnd_vdc_linv= 4.5e-05
-   Prandtl         = 1.0e4!10.0
+   Prandtl         = 10.0
    rich_mix        = 50.0
    lrich           = .true.
    ldbl_diff       = .true.
@@ -189,20 +188,20 @@
 /
 
 &hmix_nml
-   hmix_momentum_choice = 'del2'!anis'
-   hmix_tracer_choice   = 'del2'!'gent'
+   hmix_momentum_choice = 'anis'
+   hmix_tracer_choice   = 'gent'
 /
 
 &hmix_del2u_nml
    lauto_hmix           = .false. 
    lvariable_hmix       = .false. 
-   am                   = 1.6e6
+   am                   = 1.6e7
 /
 
 &hmix_del2t_nml
    lauto_hmix           = .false. 
    lvariable_hmix       = .false. 
-   ah                   = 1.6e6
+   ah                   = 1.6e7
 /
 
 &hmix_del4u_nml
@@ -288,14 +287,14 @@
 /
 
 &forcing_ws_nml
-   ws_data_type    = 'none'
+   ws_data_type    = 'analytic'
    ws_interp_freq  = 'every-timestep'
    ws_interp_type  = 'linear'
    ws_interp_inc   = 1.e20
    ws_filename     = ''
    ws_file_fmt     = 'bin'
-   ws_data_renorm(1)  = 10.
-   ws_data_renorm(2)  = 10.
+   ws_data_renorm(1)  = 1.
+   ws_data_renorm(2)  = 1.
 /
 
 &forcing_shf_nml
