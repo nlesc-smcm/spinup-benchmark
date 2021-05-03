@@ -1,1 +1,3 @@
 Here we will make a global run with 96*38*12 resolution, if restart will not be possible for this dz size data from iemic 96*38*12 will be upscaled to 96*38*16 resolution.
+
+To run model type python global_run.py
