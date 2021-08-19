@@ -2,8 +2,8 @@ import logging
 import sys
 from amuse.test.amusetest import TestWithMPI
 from omuse import units
-from interface import iemicInterface
-from interface import iemic
+from omuse.community.iemic.interface import iemicInterface
+from omuse.community.iemic.interface import iemic
 import matplotlib
 #~ matplotlib.use("gtk3agg")
 from matplotlib import pyplot
@@ -14,24 +14,24 @@ from mpl_toolkits.mplot3d import Axes3D
 
 instance = iemic(redirection="none")
 
-instance.continuation.destination_0=1.
-instance.continuation.backtracking_increase=1.2
-instance.continuation.maximum_number_of_steps=2
-instance.continuation.maximum_step_size=0.05
-instance.ocean__THCM.Depth_hdim = 5000.0
+instance.Continuation.destination_0=1.
+instance.Continuation.backtracking_increase=1.2
+instance.Continuation.maximum_number_of_steps=2
+instance.Continuation.maximum_step_size=0.05
+instance.parameters.Ocean__THCM__Depth_hdim = 5000.0
 
 #instance.ocean__THCM.Levitus_T = 1
 #instance.ocean__THCM.Levitus_S = 1
-instance.ocean__THCM.Global_Bound_ymax = 65.
-instance.ocean__THCM.Global_Bound_ymin = 10.
-instance.ocean__THCM__Starting_Parameters.Temperature_Forcing=12.5 
-instance.ocean__THCM__Starting_Parameters.Salinity_Forcing=0 #.1
-instance.ocean__THCM__Starting_Parameters.Wind_Forcing=0. #1.0
+instance.parameters.Ocean__THCM__Global_Bound_ymax = 65.
+instance.parameters.Ocean__THCM__Global_Bound_ymin = 10.
+instance.parameters.Ocean__THCM__Starting_Parameters__Temperature_Forcing=12.5 
+instance.parameters.Ocean__THCM__Starting_Parameters__Salinity_Forcing=0 #.1
+instance.parameters.Ocean__THCM__Starting_Parameters__Wind_Forcing=0. #1.0
 
 
 
-instance.ocean__THCM__Starting_Parameters.SPL1=10.0e3
-instance.ocean__THCM__Starting_Parameters.SPL2=0.001
+instance.parameters.Ocean__THCM__Starting_Parameters__SPL1=10.0e3
+instance.parameters.Ocean__THCM__Starting_Parameters__SPL2=0.001
 #instance.ocean__THCM__Starting_Parameters.P_VC=3.0
 #instance.ocean__THCM.Wind_Forcing_Type = 0 #2 for standard conditions like in pop
 
